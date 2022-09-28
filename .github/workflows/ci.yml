@@ -6,20 +6,22 @@ on:
 jobs:
   test_and_build:
     runs-on: "ubuntu-20.04"
-    name: "Elixir ${{ matrix.elixir }} test"
+    name: >-
+      Test on
+      Elixir ${{ matrix.elixir }} and Erlang/OTP ${{ matrix.otp }}
+      ${{ matrix.update-deps && 'with the latest dependencies' }}
     strategy:
       fail-fast: false
       matrix:
         include:
-          # Test on all supported releases. Compatibility matrix from
-          # https://hexdocs.pm/elixir/1.12/compatibility-and-deprecations.html
-          #
-          # These pin to the lowest supported OTP for each elixir release.
-          - { elixir: '1.10', otp: '21' }
-          - { elixir: '1.11', otp: '21' }
-          - { elixir: '1.12', otp: '22' }
-          - { elixir: '1.13', otp: '22' }
-          - { elixir: '1.14', otp: '23', update-deps: true }
+          # Test on all supported releases.
+          - { elixir: '1.11', otp: '24' }
+          - { elixir: '1.12', otp: '24' }
+          - { elixir: '1.13', otp: '24' }
+          - { elixir: '1.13', otp: '25' }
+          - { elixir: '1.14', otp: '24' }
+          - { elixir: '1.14', otp: '25' }
+          - { elixir: '1.14', otp: '25', update-deps: true }
     steps:
     - uses: actions/checkout@v3
 
